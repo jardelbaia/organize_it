@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container jumbotron vertical-center text-center" style="background-color: white;">
+    
+    <a href="{% url 'create_todo'%}" class="btn" style="background-color: #00ff99; color: black;">New To-Do</a>
+    <a href="{% url 'current_todo'%}" class="btn" style="background-color: #00ff99; color: black;">Uncompleted To-Dos</a>
+
+    <h4 style="padding: 3% 0 2% 0;">Completed <b>to-dos</b>:</h4>
+            
+    {% for todo in todos %}
+        <div class="row justify-content-center" style="padding-bottom:1%;">
+            
+            <a href="{% url 'check_completed_todo' todo.id %}" class="btn" style="background-color:  #cccccc;color: black;">
+                {% if todo.important %}<b>{% endif %}{{ todo.title }}
+                    {% if todo.important %}</b>{% endif %}
+            </a>
+            <form method="POST" action="{% url 'delete_todo' todo.id %}" style="padding:0 1% 0 1%">
+                {% csrf_token %}
+                <button type="submit" class="btn" style="background-color: #ff4d4d; color: white;">X</button>
+            </form>
+            <form method="POST" action="{% url 'uncomplete_todo' todo.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn" style="background-color: #4dffb8; color: black;">I didn't complete this!</button>
+            </form>
+        </div>
+    {% endfor %}
+    
+</div>
+{% endblock %}

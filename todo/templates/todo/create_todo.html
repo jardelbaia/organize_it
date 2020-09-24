@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container jumbotron vertical-center text-center" style="background-color: white;">
+    <h4>Create a new to-do</h4><br>
+    
+    <form method="POST" >
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn" style="background-color: #4dffb8; color: black;">Create</button>
+        <a href="{% url 'current_todo'%}"  class="btn" style="background-color: #4dffb8; color: black;">Back</a>
+    </form>
+</div>
+{% endblock %}

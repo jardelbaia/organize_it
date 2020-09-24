@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container jumbotron vertical-center text-center" style="background-color: white;">
+    {{ error }}
+
+
+    <h4  style="padding-top: 3%;">Update Goal</h4>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div class="row justify-content-center">
+
+            <form method="POST">
+            </form>
+            <form method="POST" action="{% url 'delete_goal' goal.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn" style="background-color: #ff4d4d; color: black;">Delete</button>
+            </form>
+            <form method="POST" action="{% url 'uncomplete_goal' goal.id %}" style="padding-left:1%;padding-right:1%;">
+                {% csrf_token %}
+                <button type="submit" class="btn" style="background-color: #4dffb8; color: black;">Mark as uncompleted</button>
+            </form>
+            <button type="submit" class="btn" style="background-color: #4dffb8; color: black;">Save</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
