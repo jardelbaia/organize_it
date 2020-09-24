@@ -1,9 +1,4 @@
 db.sqlite3
 organize_it/local_settings.py
-main/migrations/
-goal/migrations/
-todo/migrations/
-main/__pycache__/
-goal/__pycache__/
-todo/__pycache__/
-organize_it/__pycache__/
+**/migrations/
+**/__pycache__/
