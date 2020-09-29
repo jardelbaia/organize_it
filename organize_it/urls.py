@@ -32,4 +32,6 @@ urlpatterns = [
     path('check_goal/<int:goal_pk>/delete', views_goal.delete_goal, name='delete_goal'),
     path('check_goal/<int:goal_pk>/complete', views_goal.complete_goal, name='complete_goal'),
     path('check_goal/<int:goal_pk>/uncomplete', views_goal.uncomplete_goal, name='uncomplete_goal'),
+    path('social_goal/', views_goal.social_goal, name='social_goal'),
+
 ]

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import GoalForm
-from .models import Goal
+from .models import Goal, SocialGoal
 from django.contrib.auth.decorators import login_required
 
 @login_required
@@ -73,12 +73,24 @@ def complete_goal(request,goal_pk):
     if request.method=='POST':
         goal.completed = True
         goal.save()
-        return redirect('current_goal')
+
+        form = SocialGoal()
+        form.title = goal.title
+        form.user = goal.user
+        form.save()
+        return redirect('social_goal')
 
 @login_required
 def uncomplete_goal(request,goal_pk):
     goal = get_object_or_404(Goal, pk=goal_pk, user=request.user)
+
     if request.method=='POST':
         goal.completed = False
         goal.save()
+        
         return redirect('current_goal')
+
+@login_required
+def social_goal(request):   
+    socials =  SocialGoal.objects.all().order_by('-created')
+    return render(request,'goal/social_goal.html',{'socials': socials})
