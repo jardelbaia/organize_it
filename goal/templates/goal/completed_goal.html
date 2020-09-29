@@ -2,7 +2,9 @@
 
 {% block content %}
 <div class="container jumbotron vertical-center text-center" style="background-color: white;">
-
+    <div style='padding-bottom: 1%;'>
+        <a href="{% url 'social_goal'%}"  class="btn" style="background-color: #00c073; color: black;">See what's people doing!</a>
+    </div>
     <a href="{% url 'create_goal'%}"  class="btn" style="background-color: #00ff99; color: black;">New Goal</a>
     <a href="{% url 'current_goal'%}"  class="btn" style="background-color: #00ff99; color: black;">Uncompleted Goals</a>
     <h4 style="padding: 3% 0 2% 0;">Completed <b>goals</b>:</h4>

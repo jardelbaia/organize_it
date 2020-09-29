@@ -92,5 +92,5 @@ def uncomplete_goal(request,goal_pk):
 
 @login_required
 def social_goal(request):   
-    socials =  SocialGoal.objects.all().order_by('-created')
+    socials =  SocialGoal.objects.all().order_by('-created')[:15]
     return render(request,'goal/social_goal.html',{'socials': socials})

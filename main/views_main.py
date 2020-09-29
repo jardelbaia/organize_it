@@ -28,27 +28,30 @@ def logout_user(request):
         return redirect('home')
 
 def signup_user(request):
-    if request.method == 'GET':
-        form = UserCreationForm()
-        form.fields['username'].help_text=""
-        form.fields['password1'].help_text=""
-        form.fields['password2'].help_text=""
-        return render(request, 'main/signupuser.html', \
-        {'form': form})
-    else:
-        if request.POST['password1']==request.POST['password2']:
-            try:
-                user = User.objects.create_user(request.POST['username'],\
-                password = request.POST['password1'])
-                user.save()
-                login(request,user)
-                return redirect('apps')
-            except IntegrityError:
-                return render(request,'main/signupuser.html',\
-                {'form':UserCreationForm,'error':'That username as already been taken!'})
+    if request.user.is_anonymous:
+        if request.method == 'GET':
+            form = UserCreationForm()
+            form.fields['username'].help_text=""
+            form.fields['password1'].help_text=""
+            form.fields['password2'].help_text=""
+            return render(request, 'main/signupuser.html', \
+            {'form': form})
         else:
-            return render(request,'main/signupuser.html',\
-            {'form':UserCreationForm,'error':'Password did not match!'})
+            if request.POST['password1']==request.POST['password2']:
+                try:
+                    user = User.objects.create_user(request.POST['username'],\
+                    password = request.POST['password1'])
+                    user.save()
+                    login(request,user)
+                    return redirect('apps')
+                except IntegrityError:
+                    return render(request,'main/signupuser.html',\
+                    {'form':UserCreationForm,'error':'That username as already been taken!'})
+            else:
+                return render(request,'main/signupuser.html',\
+                {'form':UserCreationForm,'error':'Password did not match!'})
+    else:
+        return redirect('apps')
 
 @login_required
 def apps(request):

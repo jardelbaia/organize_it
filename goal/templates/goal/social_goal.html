@@ -4,13 +4,15 @@
 <div class="container jumbotron vertical-center text-center" style="background-color: white;">
     <a href="{% url 'current_goal' %}"  class="btn" style="background-color: #00ff99; color: black;">Back to Goals</a>
     <h4 style="padding: 3% 0 2% 0;">People are developing themselves:</h4>
-
+    
     {% for social in socials %}
+        
         <div class="row justify-content-center" style="padding-bottom:1%;">
             <div>
                 <b>{{ social.user}}</b> just completed the life goal <b>{{ social.title }}</b>
             </div>
         </div>
+
     {% endfor %}
     
 </div>
