@@ -1,5 +1,4 @@
 from pathlib import Path
-from .local_settings import SECRET_KEY
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,8 +13,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['jardelbaiajr.pythonanywhere.com']
 
-#SECRET_KEY = 'VeryEasySecretKey'
-SECRET_KEY = SECRET_KEY
+SECRET_KEY = 'VeryEasySecretKey'
 
 # Application definition
 
@@ -113,3 +111,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_URL = '/home'
+
+try:
+    from .local_settings import *
+except:
+    pass
