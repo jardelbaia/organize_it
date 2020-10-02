@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from main import views_main
 from todo import views_todo
 from goal import views_goal
@@ -34,4 +34,6 @@ urlpatterns = [
     path('check_goal/<int:goal_pk>/uncomplete', views_goal.uncomplete_goal, name='uncomplete_goal'),
     path('social_goal/', views_goal.social_goal, name='social_goal'),
 
+    #api
+    path('api/', include('api.urls')),
 ]
